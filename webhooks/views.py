@@ -10,5 +10,6 @@ class Webhook(TemplateView):
 
     def post(self, request, *args, **kwargs):
         d = json.loads(request.body.decode())
-        print(d)
+        if d['ref'] == 'refs/heads/master':
+            print('Do pull & deploy')
         return super(Webhook, self).post(request, *args, **kwargs)
