@@ -14,10 +14,8 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url
-from django.contrib import admin
 from webhooks.views import Webhook
 
 urlpatterns = [
     url(r'^$', Webhook.as_view(), name='webhook'),
-    url(r'^admin/', admin.site.urls),
 ]
