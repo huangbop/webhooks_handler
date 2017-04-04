@@ -8,5 +8,5 @@ class Webhook(TemplateView):
         return super(Webhook, self).get(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
-        print(request.POST)
+        print(request)
         return super(Webhook, self).post(request, *args, **kwargs)
