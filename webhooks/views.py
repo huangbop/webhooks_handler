@@ -12,7 +12,7 @@ class Webhook(TemplateView):
 
     def post(self, request, *args, **kwargs):
         d = json.loads(request.body.decode())
-        if d['ref'] == 'refs/heads/master':
+        if d.get('ref') == 'refs/heads/master':
             subprocess.check_call("git submodule update --remote", shell=True)
             os.chdir("./FW_Docs2")
             subprocess.check_call("make html", shell=True)
