@@ -13,6 +13,6 @@ class Webhook(TemplateView):
         d = json.loads(request.body.decode())
         if d['ref'] == 'refs/heads/master':
             print('Do pull & deploy')
-            subprocess.call("git submodule update --remote")
-            subprocess.call("cd ../FW_Docs2 & make html")
+            subprocess.check_call("git submodule update --remote")
+            subprocess.check_call("cd ../FW_Docs2 & make html")
         return super(Webhook, self).post(request, *args, **kwargs)
