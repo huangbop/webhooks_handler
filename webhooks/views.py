@@ -1,4 +1,5 @@
 from django.views.generic import TemplateView
+import json
 
 
 class Webhook(TemplateView):
@@ -8,5 +9,6 @@ class Webhook(TemplateView):
         return super(Webhook, self).get(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
-        print(request)
+        d = json.loads(request.body.decode())
+        print(d)
         return super(Webhook, self).post(request, *args, **kwargs)
