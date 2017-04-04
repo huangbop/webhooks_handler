@@ -1,3 +1,4 @@
+import os
 from django.views.generic import TemplateView
 import json
 import subprocess
@@ -12,7 +13,7 @@ class Webhook(TemplateView):
     def post(self, request, *args, **kwargs):
         d = json.loads(request.body.decode())
         if d['ref'] == 'refs/heads/master':
-            print('Do pull & deploy')
-            subprocess.check_call("git submodule update --remote")
-            subprocess.check_call("cd ../FW_Docs2 & make html")
+            subprocess.check_call("git submodule update --remote", shell=True)
+            os.chdir("./FW_Docs2")
+            subprocess.check_call("make html", shell=True)
         return super(Webhook, self).post(request, *args, **kwargs)
